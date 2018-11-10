@@ -11,7 +11,7 @@ module.exports.login = (payload,callback)=>{
         (cb)=>{
             sessionId = payload.email.split('@')
             sessionId = sessionId[0].split('+');
-            sessionId =  essionId.length>1 ? sessionId[1] : 0;
+            sessionId = sessionId.length>1 ? sessionId[1] : 0;
             sessionId = sessionId.toString()
             console.log("sessionId")
             sessionDAO.getSession(sessionId,cb)
