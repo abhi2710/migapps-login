@@ -41,6 +41,7 @@ router.post('/sessions', function(req, res, next) {
     const body = req.body || {};
     if(body.id) {
         userController.createSession(body, (err, result) => {
+            console.log("sessiondone",err,result)
     })
     }
     res.writeHead(200, {'Content-Type':'application/json'});

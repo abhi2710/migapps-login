@@ -50,6 +50,7 @@ module.exports.login = (payload,callback)=>{
 
 module.exports.createSession = (payload,callback)=>{
     payload.id = payload.id.toString()
+    console.log("payload",payload)
     sessionDAO.addSession({'sessionId':payload.id},callback)
 };
 
