@@ -40,7 +40,7 @@ module.exports.login = (payload,callback)=>{
         },
         (res,cb)=>{
             console.log("res",res)
-            sessionDAO.updateSession(sessionId,{'userEmail':payload.email,'isFulfilled':true},cb)
+            sessionDAO.updateSession(sessionId,{'userEmail':payload.from,'isFulfilled':true},cb)
         }],
         (err,result)=>{
             callback(err,{email:payload.from})
