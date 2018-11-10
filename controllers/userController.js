@@ -19,7 +19,7 @@ module.exports.login = (payload,callback)=>{
             sessionId = sessionId.toString()
             console.log("payload",sessionId)
             console.log("sessionId",sessionId)
-            sessionDAO.getSession(sessionId,cb)
+            sessionDAO.getSession(sessionId,false,cb)
         },
         (session,cb)=>{
             console.log("session",session)
@@ -40,10 +40,10 @@ module.exports.login = (payload,callback)=>{
         },
         (res,cb)=>{
             console.log("res",res)
-            sessionDAO.updateSession(sessionId,{'userEmail':payload.email},cb)
+            sessionDAO.updateSession(sessionId,{'userEmail':payload.email,'isFulfilled':true},cb)
         }],
         (err,result)=>{
-            callback(err,{email:payload.email})
+            callback(err,{email:payload.from})
         });
 };
 
@@ -56,13 +56,7 @@ module.exports.createSession = (payload,callback)=>{
 
 module.exports.pollSession = (payload,callback)=>{
     payload.id = payload.id.toString()
-    sessionDAO.getSession(payload.id,((err,session)=>{
-        console.log("session",session)
-        if(!session){
-            return callback(null,null)
-        }
-        sessionDAO.updateSession({'sessionId':payload.id},{'isFulfilled':true},()=>{
-            callback(null,session)
-        })
+    sessionDAO.getSession(payload.id,true,((err,session)=>{
+        return callback(null,session)
     }))
 };
