@@ -8,8 +8,8 @@ const addSession=function(sessionData,callback){
 };
 
 
-const getSession = (id,callback)=>{
-    DAOmanager.getData(models.sessions, {sessionId:id,isFulfilled:false}, {},{}, function (err, document) {
+const getSession = (sessionId,callback)=>{
+    DAOmanager.getData(models.sessions, {sessionId:sessionId,isFulfilled:false}, {},{}, function (err, document) {
         console.log("docu",document)
         callback(err,document);
     });

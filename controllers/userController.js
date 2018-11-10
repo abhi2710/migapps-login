@@ -48,7 +48,7 @@ module.exports.createSession = (payload,callback)=>{
 
 module.exports.pollSession = (payload,callback)=>{
     payload.id = payload.id.toString()
-    sessionDAO.getSession({'sessionId':payload.id},((err,session)=>{
+    sessionDAO.getSession(payload.id,((err,session)=>{
         console.log("session",session)
         if(!session){
             return callback(null,null)
