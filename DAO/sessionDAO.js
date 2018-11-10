@@ -10,6 +10,7 @@ const addSession=function(sessionData,callback){
 
 const getSession = (id,callback)=>{
     DAOmanager.getData(models.sessions, {id:id,isFulfilled:false}, {},{}, function (err, document) {
+        console.log("docu",document)
         callback(err,document);
     });
 };

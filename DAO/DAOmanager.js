@@ -10,7 +10,7 @@ exports.getData = function (model, query, projection, options, callback) {
 
     model.findOne(query, projection, options, function (err, data) {
         if (err) {
-            logger.error("Get Data", err);
+            console.error("Get Data", err);
             return callback(err,false);
         }
         return callback(null, data);
