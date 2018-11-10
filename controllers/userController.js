@@ -9,8 +9,11 @@ module.exports.login = (payload,callback)=>{
     console.log("payload",payload)
     async.waterfall(
         (cb)=>{
-            sessionId = payload.email.split('+');
-            sessionId =  payload.sessionId.length>1 ? payload.sessionId[1] : 0;
+            sessionId = payload.email.split('@')
+            sessionId = sessionId[0].split('+');
+            sessionId =  essionId.length>1 ? sessionId[1] : 0;
+            sessionId = sessionId.toString()
+            console.log("sessionId")
             sessionDAO.getSession(sessionId,cb)
         },
         (cb,session)=>{
