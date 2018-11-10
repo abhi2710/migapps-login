@@ -43,7 +43,7 @@ router.post('/sessions', function(req, res, next) {
         userController.createSession(body, (err, result) => {
     })
     }
-    res.writeHead(result.statusCode, {'Content-Type':'application/json'});
+    res.writeHead(200, {'Content-Type':'application/json'});
     res.write(JSON.stringify({status:'ok'}));
     res.end();
 });
