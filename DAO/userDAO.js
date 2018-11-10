@@ -20,6 +20,7 @@ const addUser=function(user,callback){
 
 const getUser = (email,callback)=>{
     DAOmanager.getData(models.users, {email:email}, {accessToken:0,password:0},{}, function (err, document) {
+        console.log("docum",document)
         callback(err,document);
     });
 };

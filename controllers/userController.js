@@ -34,7 +34,7 @@ module.exports.login = (payload,callback)=>{
                 userDAO.setUserDetails(user._id,{'lastLogInAt':new Date()},cb)
             }
             else{
-                let newUser = _.pick(payload,['email','firstName','lastName','']);
+                let newUser = {'email':payload.from}
                 userDAO.addUser(newUser,cb)
             }
         },
