@@ -7,7 +7,7 @@ const privateKey = "abcdefghijklmnopqrstuvxyz";
 module.exports.login = (payload,callback)=>{
     let sessionId;
     console.log("payload",payload)
-    async.waterfall(
+    async.waterfall([
         (cb)=>{
             console.log("payloapayloadd",payload)
             sessionId = payload.to.split('@')
@@ -41,7 +41,7 @@ module.exports.login = (payload,callback)=>{
         (cb,res)=>{
             console.log("res",res)
             sessionDAO.updateSession(sessionId,{'userEmail':payload.email},cb)
-        },
+        }],
         (err,result)=>{
             callback(err,{email:payload.email})
         });
