@@ -41,6 +41,7 @@ module.exports.login = (payload,callback)=>{
 
 
 module.exports.createSession = (payload,callback)=>{
+    payload.id = parseInt(payload.id)
     sessionDAO.addSession({'id':payload.id},callback)
 };
 
