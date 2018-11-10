@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 const mongoose = require('mongoose')
-
+app.listen(3000);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -39,9 +39,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoose.connect('mongodb://localhost/migApps');
-mongoose.connection.once('connected', function() {
-    console.log("Connected to database migAppsDB")
-});
+// mongoose.connect('mongodb://localhost/migApps');
+// mongoose.connection.once('connected', function() {
+//     console.log("Connected to database migAppsDB")
+// });
 
 module.exports = app;

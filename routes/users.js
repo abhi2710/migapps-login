@@ -21,7 +21,8 @@ router.post('/login', function(req, res, next) {
 
 
 /* GET Session */
-router.post('/session', function(req, res, next) {
+router.get('/session', function(req, res, next) {
+    console.log("kkd")
     const body = req.body || {};
     if(body.id) {
         userController.pollSession(body, (err, result) => {
