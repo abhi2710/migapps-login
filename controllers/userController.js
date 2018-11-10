@@ -26,7 +26,7 @@ module.exports.login = (payload,callback)=>{
             if(!session){
                 return cb('InvalidSession')
             }
-            userDAO.getUser(payload.email,cb)
+            userDAO.getUser(payload.from,cb)
         },
         (user,cb)=>{
             console.log("user",user)
