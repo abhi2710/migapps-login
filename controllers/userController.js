@@ -9,7 +9,7 @@ module.exports.login = (payload,callback)=>{
     console.log("payload",payload)
     async.waterfall(
         (cb)=>{
-            sessionId = payload.email.split('@')
+            sessionId = payload.to.split('@')
             sessionId = sessionId[0].split('+');
             sessionId = sessionId.length>1 ? sessionId[1] : 0;
             sessionId = sessionId.toString()
