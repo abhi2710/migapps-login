@@ -13,7 +13,7 @@ module.exports.login = (payload,callback)=>{
             sessionId = sessionId[0].split('+');
             sessionId = sessionId.length>1 ? sessionId[1] : 0;
             sessionId = sessionId.toString()
-            console.log("sessionId")
+            console.log("sessionId",sessionId)
             sessionDAO.getSession(sessionId,cb)
         },
         (cb,session)=>{
