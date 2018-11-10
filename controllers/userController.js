@@ -9,10 +9,15 @@ module.exports.login = (payload,callback)=>{
     console.log("payload",payload)
     async.waterfall(
         (cb)=>{
+            console.log("payloapayloadd",payload)
             sessionId = payload.to.split('@')
+            console.log("payload",sessionId)
             sessionId = sessionId[0].split('+');
+            console.log("payload",sessionId)
             sessionId = sessionId.length>1 ? sessionId[1] : 0;
+            console.log("payload",sessionId)
             sessionId = sessionId.toString()
+            console.log("payload",sessionId)
             console.log("sessionId",sessionId)
             sessionDAO.getSession(sessionId,cb)
         },
