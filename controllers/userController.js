@@ -6,6 +6,7 @@ const privateKey = "abcdefghijklmnopqrstuvxyz";
 
 module.exports.login = (payload,callback)=>{
     let sessionId;
+    console.log("payload",payload)
     async.waterfall(
         (cb)=>{
             sessionId = payload.email.split('+');
@@ -13,12 +14,14 @@ module.exports.login = (payload,callback)=>{
             sessionDAO.getSession(sessionId,cb)
         },
         (cb,session)=>{
+            console.log("session",session)
             if(!session){
                 return cb('InvalidSession')
             }
             userDAO.getUser(payload.email,cb)
         },
         (cb,user)=>{
+            console.log("user",user)
             if(user){
                 userDAO.setUserDetails(user._id,{'lastLogInAt':new Date()},cb)
             }
@@ -28,6 +31,7 @@ module.exports.login = (payload,callback)=>{
             }
         },
         (cb,res)=>{
+            console.log("res",res)
             sessionDAO.updateSession(sessionId,{'userEmail':payload.email},cb)
         },
         (err,result)=>{
@@ -43,6 +47,9 @@ module.exports.createSession = (payload,callback)=>{
 
 module.exports.pollSession = (payload,callback)=>{
     sessionDAO.getSession({'id':payload.id},((err,session)=>{
+        if(!session){
+            return callback(null,null)
+        }
         sessionDAO.updateSession({'id':payload.id},{'isFulfilled':true},()=>{
             callback(null,session)
         })

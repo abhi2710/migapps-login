@@ -17,7 +17,7 @@ const getSession = (id,callback)=>{
 
 const updateSession = (id,data,callback)=>{
     DAOmanager.update(models.sessions,{id:id},{$set:data},{},function(err,data){
-        callback(err,data.nModified);
+        callback(err,data);
     });
 };
 
