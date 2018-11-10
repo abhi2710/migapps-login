@@ -9,7 +9,7 @@ const addSession=function(sessionData,callback){
 
 
 const getSession = (id,callback)=>{
-    DAOmanager.getData(models.sessions, {id:id,isFulfilled:false}, {},{}, function (err, document) {
+    DAOmanager.getData(models.sessions, {sessionId:id,isFulfilled:false}, {},{}, function (err, document) {
         console.log("docu",document)
         callback(err,document);
     });
@@ -17,7 +17,7 @@ const getSession = (id,callback)=>{
 
 
 const updateSession = (id,data,callback)=>{
-    DAOmanager.update(models.sessions,{id:id},{$set:data},{},function(err,data){
+    DAOmanager.update(models.sessions,{sessionId:id},{$set:data},{},function(err,data){
         callback(err,data);
     });
 };

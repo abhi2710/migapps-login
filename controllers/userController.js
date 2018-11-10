@@ -41,18 +41,18 @@ module.exports.login = (payload,callback)=>{
 
 
 module.exports.createSession = (payload,callback)=>{
-    payload.id = parseInt(payload.id)
-    sessionDAO.addSession({'id':payload.id},callback)
+    payload.id = payload.id.toString()
+    sessionDAO.addSession({'sessionId':payload.id},callback)
 };
 
 
 module.exports.pollSession = (payload,callback)=>{
-    sessionDAO.getSession({'id':payload.id},((err,session)=>{
+    sessionDAO.getSession({'sessionId':payload.id},((err,session)=>{
         console.log("session",session)
         if(!session){
             return callback(null,null)
         }
-        sessionDAO.updateSession({'id':payload.id},{'isFulfilled':true},()=>{
+        sessionDAO.updateSession({'sessionId':payload.id},{'isFulfilled':true},()=>{
             callback(null,session)
         })
     }))
