@@ -39,9 +39,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// mongoose.connect('mongodb://localhost/migApps');
-// mongoose.connection.once('connected', function() {
-//     console.log("Connected to database migAppsDB")
-// });
-
+mongoose.connect('mongodb://localhost/migApps',{useNewUrlParser: true});
+mongoose.connection.once('connected', function() {
+    console.log("Connected to database migAppsDB")
+});
+console.log("hello");
 module.exports = app;
