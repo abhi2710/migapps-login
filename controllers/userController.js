@@ -21,14 +21,14 @@ module.exports.login = (payload,callback)=>{
             console.log("sessionId",sessionId)
             sessionDAO.getSession(sessionId,cb)
         },
-        (cb,session)=>{
+        (session,cb)=>{
             console.log("session",session)
             if(!session){
                 return cb('InvalidSession')
             }
             userDAO.getUser(payload.email,cb)
         },
-        (cb,user)=>{
+        (user,cb)=>{
             console.log("user",user)
             if(user){
                 userDAO.setUserDetails(user._id,{'lastLogInAt':new Date()},cb)
@@ -38,7 +38,7 @@ module.exports.login = (payload,callback)=>{
                 userDAO.addUser(newUser,cb)
             }
         },
-        (cb,res)=>{
+        (res,cb)=>{
             console.log("res",res)
             sessionDAO.updateSession(sessionId,{'userEmail':payload.email},cb)
         }],
