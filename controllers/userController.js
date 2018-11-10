@@ -43,8 +43,8 @@ module.exports.createSession = (payload,callback)=>{
 
 module.exports.pollSession = (payload,callback)=>{
     sessionDAO.getSession({'id':payload.id},((err,session)=>{
-        sessionDAO.updateSession({'id':payload.id},{'isFulfilled':true},(res,()=>{
+        sessionDAO.updateSession({'id':payload.id},{'isFulfilled':true},()=>{
             callback(null,session)
-        }))
+        })
     }))
 };
