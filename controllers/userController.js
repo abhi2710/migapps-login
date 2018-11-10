@@ -12,13 +12,13 @@ module.exports.login = (payload,callback)=>{
             sessionId =  payload.sessionId.length>1 ? payload.sessionId[1] : 0;
             sessionDAO.getSession(sessionId,cb)
         },
-        (session,cb)=>{
+        (cb,session)=>{
             if(!session){
                 return cb('InvalidSession')
             }
             userDAO.getUser(payload.email,cb)
         },
-        (user,cb)=>{
+        (cb,user)=>{
             if(user){
                 userDAO.setUserDetails(user._id,{'lastLogInAt':new Date()},cb)
             }
@@ -27,7 +27,7 @@ module.exports.login = (payload,callback)=>{
                 userDAO.addUser(newUser,cb)
             }
         },
-        (res,cb)=>{
+        (cb,res)=>{
             sessionDAO.updateSession(sessionId,{'userEmail':payload.email},cb)
         },
         (err,result)=>{

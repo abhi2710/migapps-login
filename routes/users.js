@@ -12,7 +12,9 @@ router.get('/', function(req, res, next) {
 router.post('/login', function(req, res, next) {
     const body = req.body || {};
     if(body.from && body.to) {
-        userController.login(body);
+        userController.login(body,(err,result)=>{
+            console.log("LOGIN DONE",err,result)
+        });
     }
     res.writeHead(200, {'Content-Type':'application/json'});
     res.write(JSON.stringify({status:'ok'}));
@@ -23,11 +25,11 @@ router.post('/login', function(req, res, next) {
 /* GET Session */
 router.get('/session', function(req, res, next) {
     console.log("kkd")
-    const body = req.body || {};
+    const body = req.query || {};
     if(body.id) {
         userController.pollSession(body, (err, result) => {
             res.writeHead(200, {'Content-Type':'application/json'});
-            res.write(JSON.stringify({status:'ok'}));
+            res.write(JSON.stringify({status:'ok',data:result}));
             res.end();
         });
     }
@@ -39,14 +41,11 @@ router.post('/sessions', function(req, res, next) {
     const body = req.body || {};
     if(body.id) {
         userController.createSession(body, (err, result) => {
-        res.writeHead(result.statusCode, {'Content-Type':'application/json'});
-        res.write(JSON.stringify({status:'ok'}));
-        res.end();
     })
     }
-    else{
-        res.send('error')
-    }
+    res.writeHead(result.statusCode, {'Content-Type':'application/json'});
+    res.write(JSON.stringify({status:'ok'}));
+    res.end();
 });
 
 module.exports = router;
